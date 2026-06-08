@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>திருமண அழைப்பிதழ் - அபிராமி & கௌரிசங்கர்</title>
+  <title>விவாஹ அழைப்பிதழ் - அபிராமி & கௌரிசங்கர்</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -267,7 +267,7 @@
   <!-- ══ HEADER ══ -->
   <div class="top-header">
     <div class="murugan-line">🙏 ஸ்ரீ முருகன் துணை 🙏</div>
-    <div class="title-main">திருமண விழா<br/>அழைப்பிதழ்</div>
+    <div class="title-main">விவாஹ சுபமூர்த்த<br/>அழைப்பிதழ்</div>
   </div>
 
   <!-- ══ SCENE ══ -->
@@ -460,7 +460,7 @@
     <span class="anbudaiyeer">அன்புடையீர்,</span>
 
     <p class="muhurtham-p">
-      இறைவன் அருளாலும், பெற்றோர் ஆசியாலும் நடைபெறவிருக்கும் எங்கள் திருமண விழாவில் தாங்களும் தங்கள் குடும்பத்தினருடன் கலந்து கொண்டு மணமக்களை வாழ்த்தி சிறப்பிக்குமாறு அன்புடன் அழைக்கிறோம். <strong>30-08-2026, ஞாயிற்றுக்கிழமை</strong> காலை <strong>7.30 மணி முதல் 9.00 மணி வரை</strong> நடைபெறும் திருமண முகூர்த்த நிகழ்வில் தங்களின் வருகையை ஆவலுடன் எதிர்நோக்குகிறோம்.
+      ஸ்ரீ முருகப்பெருமான் திருவருளை முன்னிட்டும் <strong>சுவஸ்திஸ்ரீ பராப்த வருடம் ஆவணி மாதம் 13-ம் தேதிக்கு சரியான</strong> ஆங்கிலம் <strong>30-08-2026, ஞாயிற்றுக்கிழமை</strong> கிருஷ்ணபக்ஷம் துவிதியை திதி உத்திரட்டாதி நட்சத்திரம் அமிர்த யோகம் கூடிய சுபயோக சுபதினத்தில் <strong>காலை 7.30 மணிக்கு மேல் 9.00 மணிக்குள்ளாக</strong> கன்னி லக்னத்தில்.
     </p>
 
     <div class="couple-box">
@@ -514,23 +514,12 @@
             🗺️ வழிகாட்டி (Maps)
           </a>
         </div>
-        </div>
-        </div>
-      
-    <div class="reception-box">
-      <div class="reception-title">வரவேற்பு நிகழ்ச்சி</div>
-      <div class="reception-details">
-        29 ஆகஸ்ட் 2026, சனிக்கிழமை<br/>
-        மாலை 6:00 மணி முதல் 9:00 மணி வரை
       </div>
     </div>
 
     <p class="closing-p">
-      தங்களின் வருகையும் வாழ்த்துகளும் எங்களுக்கு மிகப்பெரிய பரிசாகும். எங்கள் வாழ்க்கையின் இனிய தொடக்கத்தை தங்களின் அன்பான வருகையால் சிறப்பிக்குமாறு அன்புடன் கேட்டுக்கொள்கிறோம்.
+      விவாஹ முகூர்த்தம் செய்ய பெரியோர்களால் நிச்சயித்தவண்ணம், மேற்படி திருமணம் <strong>ஸ்ரீ N.M. திருமண மண்டபத்தில்</strong> நடக்கவிருக்கும் திருமணத்திற்கு தாங்கள் தங்கள் சுற்றமும் நட்பம் சூழ வருகை தந்து மணமக்களை வாழ்த்தியருள அன்புடன் அழைக்கின்றோம்.
     </p>
-
-    <div class="vazhthukkal">அன்புடன்</div>
-    <div class="anpulla">மணமக்கள் மற்றும் குடும்பத்தினர்</div>
 
   </div>
 
@@ -565,23 +554,27 @@
 </div>
 
 <script>
-  const UPI = '9840070498@ybl';
-  const NAME = 'Abhirami%20%26%20Gowrishankar%20Wedding';
-  const upiUrl = `upi://pay?pa=${UPI}&pn=${NAME}&cu=INR`;
-  const isAndroid = /android/i.test(navigator.userAgent);
+  const UPI  = '9840070498@ybl';
+  const NAME = 'Gowrishankar%20Abirami%20Wedding';
 
   document.getElementById('gpayBtn').addEventListener('click', function(e){
     e.preventDefault();
-    window.location.href = isAndroid
-      ? `intent://pay?pa=${UPI}&pn=${NAME}&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`
-      : upiUrl;
+    // Standard UPI deep link — opens GPay on Android, any UPI app on iOS
+    window.location.href = `gpay://upi/pay?pa=${UPI}&pn=${NAME}&cu=INR`;
+    // Fallback after 1s if GPay not installed
+    setTimeout(function(){
+      window.location.href = `upi://pay?pa=${UPI}&pn=${NAME}&cu=INR`;
+    }, 1000);
   });
 
   document.getElementById('phonepayBtn').addEventListener('click', function(e){
     e.preventDefault();
-    window.location.href = isAndroid
-      ? `intent://pay?pa=${UPI}&pn=${NAME}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`
-      : upiUrl;
+    // Standard UPI deep link — opens PhonePe directly
+    window.location.href = `phonepe://pay?pa=${UPI}&pn=${NAME}&cu=INR`;
+    // Fallback after 1s if PhonePe not installed
+    setTimeout(function(){
+      window.location.href = `upi://pay?pa=${UPI}&pn=${NAME}&cu=INR`;
+    }, 1000);
   });
 </script>
 </body>
