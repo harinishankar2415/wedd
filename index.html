@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>விவாஹ அழைப்பிதழ் - அபிராமி & கௌரிசங்கர்</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c8922a;
+      --gold-light: #f0d080;
+      --gold-dark: #8b5e1a;
+      --red: #c0392b;
+      --maroon: #7b1c1c;
+      --text-dark: #2a1a0e;
+      --pink-deep: #e07a90;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f0dfc8;
+      font-family: 'Noto Serif Tamil', serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
+    .card {
+      max-width: 500px;
+      width: 100%;
+      background: linear-gradient(160deg, #fff9f0 0%, #fef0e4 50%, #fde8dc 100%);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(139,94,26,0.3), 0 0 0 2px var(--gold-light);
+      position: relative;
+      animation: fadeIn 0.8s ease-out;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 2px solid var(--gold-light);
+      border-radius: 12px;
+      pointer-events: none;
+      z-index: 100;
+    }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes float { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-5px); } }
+    @keyframes sway { 0%,100% { transform: translateX(-50%) rotate(-1deg); } 50% { transform: translateX(-50%) rotate(1deg); } }
+
+    /* ── HEADER (above scene) ── */
+    .top-header {
+      background: linear-gradient(135deg, #fff0e8, #fde4d4);
+      text-align: center;
+      padding: 18px 20px 12px;
+      border-bottom: 2px solid var(--gold-light);
+    }
+    .murugan-line {
+      font-size: 13px;
+      color: var(--maroon);
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .title-main {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1.3;
+      text-shadow: 0 1px 4px rgba(192,57,43,0.15);
+    }
+
+    /* ── ILLUSTRATION SCENE ── */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 390px;
+      background: linear-gradient(180deg, #ffe8f0 0%, #ffd4e8 50%, #ffe4c8 100%);
+      overflow: hidden;
+    }
+
+    /* Tassel arch */
+    .tassels {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 340px;
+      display: flex;
+      justify-content: space-around;
+      z-index: 2;
+    }
+    .tassel { display: flex; flex-direction: column; align-items: center; }
+    .tassel-string { width: 1.5px; background: linear-gradient(180deg,#d4a0b0,#c8922a); }
+    .tassel-dot {
+      width: 10px; height: 14px;
+      border-radius: 50% 50% 60% 60%;
+      background: radial-gradient(circle at 40% 30%, #ff9ab5, #e05070);
+      box-shadow: 0 2px 6px rgba(200,60,90,0.4);
+    }
+
+    /* Ganesha */
+    .ganesha-wrap {
+      position: absolute;
+      top: 8px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* Couple photo — sits in CENTER of scene */
+    .couple-photo {
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 240px;
+      border-radius: 50% 50% 48% 48% / 55% 55% 45% 45%;
+      border: 4px solid var(--gold);
+      background: linear-gradient(135deg,#ffe0ec,#ffd0e8);
+      overflow: hidden;
+      z-index: 6;
+      box-shadow: 0 6px 28px rgba(200,146,42,0.5);
+    }
+    .couple-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+
+    /* Banana leaves */
+    .leaf { position: absolute; bottom: 0; z-index: 3; }
+    .leaf-l { left: 10px; }
+    .leaf-r { right: 10px; transform: scaleX(-1); }
+
+    /* Lotus */
+    .lotus { position: absolute; bottom: 80px; z-index: 4; }
+    .lotus-l { left: -8px; }
+    .lotus-r { right: -8px; transform: scaleX(-1); }
+
+    /* Elephant — at bottom center, lower z-index than photo */
+    .elephant-wrap {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      animation: sway 6s ease-in-out infinite;
+    }
+
+    /* Kalasam pots */
+    .kalasam { position: absolute; bottom: 0; z-index: 4; }
+    .kalasam-l { left: 4px; }
+    .kalasam-r { right: 4px; }
+
+    /* ── GOLD DIVIDER ── */
+    .divider {
+      display: flex; align-items: center;
+      gap: 10px; padding: 10px 24px;
+    }
+    .div-line { flex:1; height:1.5px; background: linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .div-diamond { width:8px; height:8px; background:var(--gold); transform:rotate(45deg); }
+
+    /* ── BODY ── */
+    .body { padding: 4px 22px 16px; }
+    .anbudaiyeer {
+      display: block;
+      font-size: 14px; color: var(--maroon);
+      font-weight: 700; text-decoration: underline;
+      margin-bottom: 10px;
+    }
+    .muhurtham-p {
+      font-size: 13px; color: var(--text-dark);
+      line-height: 1.9; font-weight: 600;
+      text-align: justify; margin-bottom: 14px;
+    }
+    .muhurtham-p strong { color: var(--maroon); }
+
+    /* Bride/Groom box */
+    .couple-box {
+      border: 2px solid var(--gold);
+      border-radius: 10px; overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 12px rgba(200,146,42,0.18);
+    }
+    .couple-row { display: grid; grid-template-columns: 1fr 1fr; }
+    .bride-side, .groom-side { padding: 13px 11px; text-align: center; }
+    .bride-side { border-right: 1px solid var(--gold-light); background: linear-gradient(135deg,rgba(255,220,230,0.4),rgba(255,245,250,0.3)); }
+    .groom-side { background: linear-gradient(135deg,rgba(220,240,255,0.3),rgba(240,250,255,0.4)); }
+    .parent-names { font-size: 11.5px; color: var(--text-dark); line-height: 1.7; font-weight: 600; margin-bottom: 7px; }
+    .child-label { font-size: 10.5px; color: #666; margin-bottom: 3px; font-family:'Noto Sans Tamil',sans-serif; }
+    .child-name { font-size: 17px; color: var(--red); font-weight: 700; line-height: 1.2; }
+    .ennkira { font-size: 11px; color: var(--gold-dark); font-style: italic; margin-top: 3px; }
+
+    /* Info section */
+    .info-section {
+      background: linear-gradient(135deg,rgba(200,146,42,0.07),rgba(200,146,42,0.03));
+      border: 1px solid var(--gold-light);
+      border-radius: 10px; padding: 13px 15px; margin-bottom: 13px;
+    }
+    .info-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+    .info-row:last-child { margin-bottom: 0; }
+    .info-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .info-label { font-size: 11px; color: var(--gold-dark); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-family:'Noto Sans Tamil',sans-serif; }
+    .info-value { font-size: 13px; color: var(--text-dark); font-weight: 600; line-height: 1.65; }
+    .info-value strong { color: var(--maroon); font-size: 14.5px; }
+    .map-btn {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 7px;
+      background: linear-gradient(135deg,var(--gold),var(--gold-dark));
+      color: white; border: none; border-radius: 20px;
+      padding: 6px 16px; font-size: 12px;
+      font-family:'Noto Sans Tamil',sans-serif; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 3px 10px rgba(139,94,26,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .map-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(139,94,26,0.45); }
+
+    /* Reception */
+    .reception-box {
+      background: linear-gradient(135deg,#fff0f5,#fde8f0);
+      border: 1.5px solid var(--pink-deep);
+      border-radius: 10px; padding: 12px 16px; margin-bottom: 13px; text-align: center;
+    }
+    .reception-title { font-size: 15px; color: var(--maroon); font-weight: 700; margin-bottom: 7px; }
+    .reception-details { font-size: 13px; color: var(--text-dark); font-weight: 600; line-height: 1.8; }
+
+    /* Closing */
+    .closing-p { font-size: 12.5px; color: var(--text-dark); line-height: 1.85; text-align: justify; margin-bottom: 10px; font-weight: 600; }
+    .closing-p strong { color: var(--maroon); }
+    .vazhthukkal { text-align: center; font-size: 14px; color: var(--maroon); font-weight: 700; margin-bottom: 4px; }
+    .anpulla { text-align:center; font-size:12px; color:var(--gold-dark); font-family:'Noto Sans Tamil',sans-serif; }
+
+    /* ── GIFT SECTION ── */
+    .gift-section {
+      background: linear-gradient(160deg,#fffbf0,#fff5e0);
+      border-top: 2px solid var(--gold-light);
+      padding: 20px 22px;
+    }
+    .gift-title { text-align:center; font-size:16px; color:var(--gold-dark); font-weight:700; margin-bottom:5px; }
+    .gift-sub { text-align:center; font-size:12px; color:#888; font-family:'Noto Sans Tamil',sans-serif; margin-bottom:14px; line-height:1.5; }
+    .upi-box {
+      background: white; border: 1.5px solid var(--gold-light);
+      border-radius: 10px; padding: 10px 14px; text-align:center;
+      margin-bottom: 14px; box-shadow: 0 2px 8px rgba(200,146,42,0.1);
+    }
+    .upi-label { font-size:11px; color:var(--gold-dark); font-family:'Noto Sans Tamil',sans-serif; font-weight:600; margin-bottom:4px; }
+    .upi-id { font-size:16px; font-weight:700; color:var(--text-dark); font-family:monospace; letter-spacing:1px; }
+    .pay-btns { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .pay-btn {
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      padding: 14px 10px; border: none; border-radius: 12px;
+      cursor: pointer; font-size: 15px; font-weight: 700;
+      font-family:'Noto Sans Tamil',sans-serif;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.14);
+    }
+    .pay-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .pay-btn:active { transform: scale(0.97); }
+    .gpay-btn { background: linear-gradient(135deg,#4285F4,#34A853); color:white; }
+    .phonepay-btn { background: linear-gradient(135deg,#5f259f,#8B1FA8); color:white; }
+
+    .bottom-ornament { text-align:center; padding:12px 24px 20px; font-size:20px; letter-spacing:8px; color:var(--gold); }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- ══ HEADER ══ -->
+  <div class="top-header">
+    <div class="murugan-line">🙏 ஸ்ரீ முருகன் துணை 🙏</div>
+    <div class="title-main">விவாஹ சுபமூர்த்த<br/>அழைப்பிதழ்</div>
+  </div>
+
+  <!-- ══ SCENE ══ -->
+  <div class="scene">
+
+    <!-- Tassels -->
+    <div class="tassels">
+      <div class="tassel"><div class="tassel-string" style="height:38px"></div><div class="tassel-dot"></div></div>
+      <div class="tassel"><div class="tassel-string" style="height:52px"></div><div class="tassel-dot"></div></div>
+      <div class="tassel"><div class="tassel-string" style="height:62px"></div><div class="tassel-dot"></div></div>
+      <div class="tassel"><div class="tassel-string" style="height:52px"></div><div class="tassel-dot"></div></div>
+      <div class="tassel"><div class="tassel-string" style="height:38px"></div><div class="tassel-dot"></div></div>
+    </div>
+
+    <!-- Ganesha -->
+    <div class="ganesha-wrap">
+      <svg width="58" height="68" viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 2px 6px rgba(139,94,26,0.5))">
+        <ellipse cx="40" cy="65" rx="22" ry="20" fill="#c8922a"/>
+        <ellipse cx="40" cy="65" rx="19" ry="17" fill="#e8a830"/>
+        <ellipse cx="40" cy="38" rx="18" ry="18" fill="#e8a830"/>
+        <ellipse cx="20" cy="36" rx="10" ry="14" fill="#d4891e" opacity="0.9"/>
+        <ellipse cx="60" cy="36" rx="10" ry="14" fill="#d4891e" opacity="0.9"/>
+        <ellipse cx="21" cy="36" rx="7" ry="10" fill="#f0b040" opacity="0.6"/>
+        <ellipse cx="59" cy="36" rx="7" ry="10" fill="#f0b040" opacity="0.6"/>
+        <path d="M 38 50 Q 30 58 35 68 Q 38 72 34 72" stroke="#c8922a" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="33" cy="35" r="3.5" fill="white"/><circle cx="47" cy="35" r="3.5" fill="white"/>
+        <circle cx="34" cy="35.5" r="2" fill="#1a0a00"/><circle cx="48" cy="35.5" r="2" fill="#1a0a00"/>
+        <circle cx="40" cy="30" r="2" fill="#c0392b"/>
+        <path d="M 25 24 Q 40 10 55 24" stroke="#c8922a" stroke-width="3" fill="none"/>
+        <circle cx="40" cy="13" r="4" fill="#c8922a"/>
+        <circle cx="28" cy="20" r="2.5" fill="#c8922a"/><circle cx="52" cy="20" r="2.5" fill="#c8922a"/>
+        <path d="M 30 45 Q 24 50 26 56" stroke="#fff5cc" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M 20 60 Q 10 55 14 48" stroke="#d4891e" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M 60 60 Q 70 55 66 48" stroke="#d4891e" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <ellipse cx="66" cy="46" rx="7" ry="8" fill="#fff5cc"/>
+        <path d="M 20 82 Q 40 75 60 82" stroke="#e07a90" stroke-width="4" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Couple photo -->
+    <div class="couple-photo">
+      <img src="couple.jpg" alt="மணமக்கள்" />
+    </div>
+
+    <!-- Banana leaves LEFT -->
+    <div class="leaf leaf-l">
+      <svg width="85" height="200" viewBox="0 0 85 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 42 200 Q 8 148 4 78 Q 0 28 28 4 Q 54 24 58 78 Q 64 140 42 200Z" fill="#3d7a45" opacity="0.92"/>
+        <path d="M 42 200 Q 28 148 26 78 Q 24 28 28 4" stroke="#2d5a35" stroke-width="2" fill="none"/>
+        <path d="M 38 178 Q 44 148 54 108 Q 62 78 54 48" fill="#55a05a" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="leaf leaf-l" style="left:-4px;bottom:8px;opacity:0.7;transform:rotate(8deg)">
+      <svg width="65" height="155" viewBox="0 0 65 155" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 33 155 Q 5 118 2 62 Q -1 18 18 2 Q 42 18 46 62 Q 50 108 33 155Z" fill="#4a8c52"/>
+        <path d="M 33 155 Q 20 118 18 62 Q 16 18 18 2" stroke="#2d5a35" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Banana leaves RIGHT -->
+    <div class="leaf leaf-r">
+      <svg width="85" height="200" viewBox="0 0 85 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 42 200 Q 8 148 4 78 Q 0 28 28 4 Q 54 24 58 78 Q 64 140 42 200Z" fill="#3d7a45" opacity="0.92"/>
+        <path d="M 42 200 Q 28 148 26 78 Q 24 28 28 4" stroke="#2d5a35" stroke-width="2" fill="none"/>
+        <path d="M 38 178 Q 44 148 54 108 Q 62 78 54 48" fill="#55a05a" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <!-- Lotus LEFT -->
+    <div class="lotus lotus-l">
+      <svg width="100" height="120" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="25" cy="75" rx="16" ry="32" fill="#f4a7b9" transform="rotate(-38 25 75)" opacity="0.7"/>
+        <ellipse cx="50" cy="60" rx="17" ry="37" fill="#f4a7b9" transform="rotate(-12 50 60)" opacity="0.8"/>
+        <ellipse cx="75" cy="70" rx="16" ry="32" fill="#f4a7b9" transform="rotate(24 75 70)" opacity="0.7"/>
+        <ellipse cx="25" cy="88" rx="15" ry="30" fill="#e896b0" transform="rotate(-28 25 88)"/>
+        <ellipse cx="50" cy="75" rx="17" ry="36" fill="#e896b0" transform="rotate(-4 50 75)"/>
+        <ellipse cx="73" cy="86" rx="15" ry="30" fill="#e896b0" transform="rotate(18 73 86)"/>
+        <ellipse cx="50" cy="86" rx="13" ry="11" fill="#f4a7b9"/>
+        <circle cx="50" cy="82" r="7" fill="#ffb8cc"/>
+        <circle cx="50" cy="81" r="4" fill="#ffd0e0"/>
+        <path d="M 50 105 Q 36 118 26 120" stroke="#4a7c59" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Lotus RIGHT -->
+    <div class="lotus lotus-r">
+      <svg width="100" height="120" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="25" cy="75" rx="16" ry="32" fill="#f4a7b9" transform="rotate(-38 25 75)" opacity="0.7"/>
+        <ellipse cx="50" cy="60" rx="17" ry="37" fill="#f4a7b9" transform="rotate(-12 50 60)" opacity="0.8"/>
+        <ellipse cx="75" cy="70" rx="16" ry="32" fill="#f4a7b9" transform="rotate(24 75 70)" opacity="0.7"/>
+        <ellipse cx="25" cy="88" rx="15" ry="30" fill="#e896b0" transform="rotate(-28 25 88)"/>
+        <ellipse cx="50" cy="75" rx="17" ry="36" fill="#e896b0" transform="rotate(-4 50 75)"/>
+        <ellipse cx="73" cy="86" rx="15" ry="30" fill="#e896b0" transform="rotate(18 73 86)"/>
+        <ellipse cx="50" cy="86" rx="13" ry="11" fill="#f4a7b9"/>
+        <circle cx="50" cy="82" r="7" fill="#ffb8cc"/>
+        <circle cx="50" cy="81" r="4" fill="#ffd0e0"/>
+        <path d="M 50 105 Q 36 118 26 120" stroke="#4a7c59" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Kalasam LEFT -->
+    <div class="kalasam kalasam-l">
+      <svg width="46" height="78" viewBox="0 0 50 82" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="25" cy="78" rx="17" ry="4" fill="#c8922a"/>
+        <path d="M 10 62 Q 8 42 12 30 Q 16 20 25 20 Q 34 20 38 30 Q 42 42 40 62 Z" fill="#d4a040"/>
+        <path d="M 12 57 Q 10 44 14 32 Q 18 23 25 23 Q 32 23 36 32 Q 38 44 38 57" fill="#e8b850" opacity="0.5"/>
+        <rect x="19" y="16" width="12" height="8" rx="2" fill="#c8922a"/>
+        <ellipse cx="25" cy="14" rx="9" ry="11" fill="#6b4226"/>
+        <ellipse cx="25" cy="13" rx="7" ry="9" fill="#7d5030"/>
+        <path d="M 25 5 Q 15 -3 8 4" stroke="#3d7a45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 25 5 Q 35 -3 42 4" stroke="#3d7a45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 25 3 Q 20 -6 22 -10" stroke="#4a8c52" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M 25 3 Q 30 -6 28 -10" stroke="#4a8c52" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M 12 47 Q 25 52 38 47" stroke="#c8922a" stroke-width="1.5" fill="none"/>
+        <path d="M 11 55 Q 25 60 39 55" stroke="#c8922a" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Kalasam RIGHT -->
+    <div class="kalasam kalasam-r">
+      <svg width="46" height="78" viewBox="0 0 50 82" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="25" cy="78" rx="17" ry="4" fill="#c8922a"/>
+        <path d="M 10 62 Q 8 42 12 30 Q 16 20 25 20 Q 34 20 38 30 Q 42 42 40 62 Z" fill="#d4a040"/>
+        <path d="M 12 57 Q 10 44 14 32 Q 18 23 25 23 Q 32 23 36 32 Q 38 44 38 57" fill="#e8b850" opacity="0.5"/>
+        <rect x="19" y="16" width="12" height="8" rx="2" fill="#c8922a"/>
+        <ellipse cx="25" cy="14" rx="9" ry="11" fill="#6b4226"/>
+        <ellipse cx="25" cy="13" rx="7" ry="9" fill="#7d5030"/>
+        <path d="M 25 5 Q 15 -3 8 4" stroke="#3d7a45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 25 5 Q 35 -3 42 4" stroke="#3d7a45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 25 3 Q 20 -6 22 -10" stroke="#4a8c52" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M 25 3 Q 30 -6 28 -10" stroke="#4a8c52" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M 12 47 Q 25 52 38 47" stroke="#c8922a" stroke-width="1.5" fill="none"/>
+        <path d="M 11 55 Q 25 60 39 55" stroke="#c8922a" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Elephant -->
+    <div class="elephant-wrap">
+      <svg width="170" height="95" viewBox="0 0 180 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 55 45 Q 100 35 145 45 Q 148 65 145 75 Q 100 82 55 75 Q 52 65 55 45Z" fill="#1a6b8a"/>
+        <path d="M 58 48 Q 100 38 142 48 Q 145 65 142 72 Q 100 78 58 72 Q 55 65 58 48Z" fill="#1e7fa8"/>
+        <path d="M 60 50 Q 100 42 140 50" stroke="#f0d080" stroke-width="2" fill="none"/>
+        <path d="M 60 68 Q 100 75 140 68" stroke="#f0d080" stroke-width="2" fill="none"/>
+        <text x="88" y="63" font-size="16" fill="#f0d080" text-anchor="middle">✦</text>
+        <text x="108" y="63" font-size="10" fill="#f0d080" text-anchor="middle">✦</text>
+        <text x="68" y="63" font-size="10" fill="#f0d080" text-anchor="middle">✦</text>
+        <ellipse cx="100" cy="62" rx="50" ry="30" fill="#d4c0a8"/>
+        <ellipse cx="100" cy="58" rx="46" ry="26" fill="#e0ccb4"/>
+        <ellipse cx="55" cy="52" rx="28" ry="26" fill="#d4c0a8"/>
+        <ellipse cx="52" cy="50" rx="24" ry="22" fill="#e0ccb4"/>
+        <ellipse cx="35" cy="45" rx="18" ry="22" fill="#d0b898" transform="rotate(-10 35 45)"/>
+        <ellipse cx="37" cy="46" rx="14" ry="18" fill="#e8c9a8" transform="rotate(-10 37 46)" opacity="0.6"/>
+        <circle cx="52" cy="38" r="5" fill="#c8922a"/>
+        <circle cx="52" cy="38" r="3" fill="#f0d080"/>
+        <circle cx="52" cy="38" r="1.5" fill="#c8922a"/>
+        <circle cx="42" cy="48" r="5" fill="white"/>
+        <circle cx="43" cy="48.5" r="3" fill="#2a1a0e"/>
+        <circle cx="44" cy="47.5" r="1" fill="white"/>
+        <path d="M 30 58 Q 18 70 22 82 Q 25 90 18 92" stroke="#c8b09a" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M 30 58 Q 18 70 22 82 Q 25 90 18 92" stroke="#d4c0a8" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M 32 62 Q 20 68 16 78" stroke="#fff5cc" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <rect x="62" y="84" width="15" height="16" rx="6" fill="#d4c0a8"/>
+        <rect x="81" y="86" width="15" height="14" rx="6" fill="#d4c0a8"/>
+        <rect x="108" y="86" width="15" height="14" rx="6" fill="#d4c0a8"/>
+        <rect x="127" y="84" width="15" height="16" rx="6" fill="#d4c0a8"/>
+        <rect x="61" y="94" width="17" height="4" rx="2" fill="#c8922a"/>
+        <rect x="126" y="92" width="17" height="4" rx="2" fill="#c8922a"/>
+        <path d="M 150 62 Q 162 60 165 70 Q 166 76 160 78" stroke="#c8b09a" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <rect x="80" y="28" width="48" height="20" rx="5" fill="#c8922a"/>
+        <rect x="82" y="30" width="44" height="16" rx="4" fill="#e8a830"/>
+        <rect x="78" y="26" width="52" height="5" rx="3" fill="#c8922a"/>
+        <rect x="82" y="26" width="44" height="3" rx="2" fill="#f0d080"/>
+      </svg>
+    </div>
+
+  </div><!-- end scene -->
+
+  <!-- ══ DIVIDER ══ -->
+  <div class="divider">
+    <div class="div-line"></div>
+    <div class="div-diamond"></div>
+    <span style="font-size:16px;color:var(--gold)">🌸</span>
+    <div class="div-diamond"></div>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- ══ BODY ══ -->
+  <div class="body">
+
+    <span class="anbudaiyeer">அன்புடையீர்,</span>
+
+    <p class="muhurtham-p">
+      ஸ்ரீ முருகப்பெருமான் திருவருளை முன்னிட்டும் <strong>சுவஸ்திஸ்ரீ பராப்த வருடம் ஆவணி மாதம் 13-ம் தேதிக்கு சரியான</strong> ஆங்கிலம் <strong>30-08-2026, ஞாயிற்றுக்கிழமை</strong> கிருஷ்ணபக்ஷம் துவிதியை திதி உத்திரட்டாதி நட்சத்திரம் அமிர்த யோகம் கூடிய சுபயோக சுபதினத்தில் <strong>காலை 7.30 மணிக்கு மேல் 9.00 மணிக்குள்ளாக</strong> கன்னி லக்னத்தில்.
+    </p>
+
+    <div class="couple-box">
+      <div class="couple-row">
+        <div class="bride-side">
+          <div class="parent-names">
+            சென்னை - 62, திருமுல்லைவாயில்<br/>
+            தெய்வத் திரு. <strong>S. ராமகிருஷ்ணன்</strong><br/>
+            திருமதி. <strong>R. வளர்மதி</strong><br/>
+            அவர்களின் இளய குமாரத்தி
+          </div>
+          <div class="child-label">திருநிறைச்செல்வி</div>
+          <div class="child-name">S.R. அபிராமி</div>
+          <div class="ennkira">என்கிற கன்னிகைக்கும்</div>
+        </div>
+        <div class="groom-side">
+          <div class="parent-names">
+            சென்னை-53, அம்பத்தூர்<br/>
+            திரு. <strong>D. முரளிராஜன்</strong><br/>
+            திருமதி. <strong>M. உமா மகேஸ்வரி</strong><br/>
+            அவர்களின் மூத்த குமாரன்
+          </div>
+          <div class="child-label">திருவளர் செல்வன்</div>
+          <div class="child-name">M. கௌரிசங்கர்</div>
+          <div class="ennkira">என்கிற வரனுக்கும்</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-row">
+        <div class="info-icon">📅</div>
+        <div>
+          <div class="info-label">திருமண நாள் &amp; நேரம்</div>
+          <div class="info-value">
+            <strong>30 ஆகஸ்ட் 2026</strong>, ஞாயிறு<br/>
+            காலை <strong>7:30</strong> மணி முதல் <strong>9:00</strong> மணிவரை
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🏛️</div>
+        <div>
+          <div class="info-label">திருமண மண்டபம்</div>
+          <div class="info-value">
+            <strong>ஸ்ரீ N.M. திருமண மண்டபம்</strong><br/>
+            சோழம்பேடு மெயின்ரோடு,<br/>
+            திருமுல்லைவாயில், சென்னை - 600 062
+          </div>
+          <a class="map-btn" href="https://maps.google.com/?q=NM+Kalyana+Mandapam+Sozhanganallur+Main+Road+Thirumuruganpoondi+Chennai+600062" target="_blank">
+            🗺️ வழிகாட்டி (Maps)
+          </a>
+        </div>
+      </div>
+    </div>
+
+    
+
+  </div>
+
+  <div class="divider">
+    <div class="div-line"></div>
+    <span style="font-size:16px;color:var(--gold)">🌷</span>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- ══ GIFT ══ -->
+  <div class="gift-section">
+    <div class="gift-title">🎁 பரிசு அனுப்ப விரும்புவோர்</div>
+    <div class="gift-sub">மணமக்களுக்கு பரிசு அனுப்ப விரும்புவோர்<br/>கீழே உள்ள UPI மூலம் அனுப்பலாம்</div>
+    <div class="upi-box">
+      <div class="upi-label">UPI ID</div>
+      <div class="upi-id">9840070498@ybl</div>
+    </div>
+    <div class="pay-btns">
+      <a class="pay-btn gpay-btn" id="gpayBtn" href="#">
+        <svg width="22" height="22" viewBox="0 0 48 48"><text x="4" y="32" font-size="14" font-weight="bold" fill="white" font-family="Arial">GPay</text></svg>
+        Google Pay
+      </a>
+      <a class="pay-btn phonepay-btn" id="phonepayBtn" href="#">
+        <svg width="20" height="20" viewBox="0 0 48 48"><rect x="10" y="4" width="28" height="40" rx="5" fill="white" opacity="0.3"/><circle cx="24" cy="37" r="2.5" fill="white" opacity="0.9"/></svg>
+        PhonePe
+      </a>
+    </div>
+  </div>
+
+  <div class="bottom-ornament">✦ 🌸 ✦ 🌸 ✦</div>
+
+</div>
+
+<script>
+  const UPI = '9840070498@ybl';
+  const NAME = 'Abhirami%20%26%20Gowrishankar%20Wedding';
+  const upiUrl = `upi://pay?pa=${UPI}&pn=${NAME}&cu=INR`;
+  const isAndroid = /android/i.test(navigator.userAgent);
+
+  document.getElementById('gpayBtn').addEventListener('click', function(e){
+    e.preventDefault();
+    window.location.href = isAndroid
+      ? `intent://pay?pa=${UPI}&pn=${NAME}&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`
+      : upiUrl;
+  });
+
+  document.getElementById('phonepayBtn').addEventListener('click', function(e){
+    e.preventDefault();
+    window.location.href = isAndroid
+      ? `intent://pay?pa=${UPI}&pn=${NAME}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`
+      : upiUrl;
+  });
+</script>
+</body>
+</html>
