@@ -576,37 +576,37 @@
 </div>
 
 <script>
-  const UPI  = '9840070498@ybl';
-  const NAME = 'Gowrishankar%20Abirami%20Wedding';
+  const UPI = '9840070498@ybl';
+const NAME = 'Gowrishankar Abirami Wedding';
+const NOTE = 'Wedding Gift';
+
+const upiUrl =
+  `upi://pay?pa=${encodeURIComponent(UPI)}` +
+  `&pn=${encodeURIComponent(NAME)}` +
+  `&tn=${encodeURIComponent(NOTE)}` +
+  `&cu=INR`;
 
   function openUPI(appScheme, packageName) {
-    // Build UPI URL
-    const upiUrl = 'upi://pay?pa=' + UPI + '&pn=' + NAME + '&cu=INR';
 
-    // On Android: use intent URL which the OS handles — opens the specific app
-    // This is the correct way to open a specific UPI app from a browser
-    const ua = navigator.userAgent.toLowerCase();
-    if (/android/.test(ua)) {
-      const intentUrl = 'intent://pay?pa=' + UPI + '&pn=' + NAME +
-        '&cu=INR#Intent;scheme=upi;package=' + packageName +
-        ';S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3D' +
-        packageName + ';end';
-      window.location.href = intentUrl;
-    } else {
-      // iOS / desktop: open generic UPI link
-      window.location.href = upiUrl;
-    }
-  }
+    const upiUrl =
+      'upi://pay?' +
+      'pa=' + encodeURIComponent(UPI) +
+      '&pn=' + encodeURIComponent(NAME) +
+      '&tn=' + encodeURIComponent('Wedding Gift') +
+      '&cu=INR';
+
+    window.location.href = upiUrl;
+}
 
   document.getElementById('gpayBtn').addEventListener('click', function(e){
-    e.preventDefault();
-    openUPI('gpay', 'com.google.android.apps.nbu.paisa.user');
-  });
+  e.preventDefault();
+  window.location.href = upiUrl;
+});
 
-  document.getElementById('phonepayBtn').addEventListener('click', function(e){
-    e.preventDefault();
-    openUPI('phonepe', 'com.phonepe.app');
-  });
+document.getElementById('phonepayBtn').addEventListener('click', function(e){
+  e.preventDefault();
+  window.location.href = upiUrl;
+});
 
   // Copy UPI ID to clipboard
   function copyUPI() {
