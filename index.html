@@ -594,41 +594,19 @@
   const UPI  = '9840070498@ybl';
   const NAME = encodeURIComponent('Gowrishankar Abirami Wedding');
 
-  function openUPI(appScheme, packageName) {
-    // Build UPI URL
-    const upiUrl =
-  `upi://pay?pa=${encodeURIComponent(UPI)}` +
-  `&pn=${encodeURIComponent('Gowrishankar Abirami Wedding')}` +
-  `&cu=INR`;
-
-    // On Android: use intent URL which the OS handles — opens the specific app
-    // This is the correct way to open a specific UPI app from a browser
-    const ua = navigator.userAgent.toLowerCase();
-    if (/android/.test(ua)) {
-      const intentUrl =
-  'intent://pay' +
-  '?pa=' + encodeURIComponent(UPI) +
-  '&pn=' + encodeURIComponent('Gowrishankar Abirami Wedding') +
-  '&cu=INR' +
-  '#Intent;scheme=upi;package=' +
-  packageName +
-  ';end';
-      window.location.href = intentUrl;
-    } else {
-      // iOS / desktop: open generic UPI link
-      window.location.href = upiUrl;
-    }
-  }
+ function openUPI() {
+  window.location.href = 'upi://pay?pa=9840070498@ybl';
+}
 
   document.getElementById('gpayBtn').addEventListener('click', function(e){
-    e.preventDefault();
-    openUPI('gpay', 'com.google.android.apps.nbu.paisa.user');
-  });
+  e.preventDefault();
+  openUPI();
+});
 
-  document.getElementById('phonepayBtn').addEventListener('click', function(e){
-    e.preventDefault();
-    openUPI('phonepe', 'com.phonepe.app');
-  });
+document.getElementById('phonepayBtn').addEventListener('click', function(e){
+  e.preventDefault();
+  openUPI();
+});
 
   // Copy UPI ID to clipboard
   function copyUPI() {
