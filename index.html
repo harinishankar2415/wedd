@@ -594,8 +594,11 @@
   const UPI  = 'harinishankar2415@okhdfcbank';
   const NAME = encodeURIComponent('Gowrishankar Abirami Wedding');
 
- function openUPI() {
-  window.location.href = 'upi://pay?pa=harinishankar2415@okhdfcbank';
+ 
+
+function openUPI() {
+  window.location.href =
+    `upi://pay?pa=${UPI}&pn=${NAME}&cu=INR`;
 }
 
   document.getElementById('gpayBtn').addEventListener('click', function(e){
