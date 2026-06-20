@@ -180,9 +180,15 @@
       margin-bottom: 14px;
       box-shadow: 0 3px 12px rgba(200,146,42,0.18);
     }
-    .couple-row { display: grid; grid-template-columns: 1fr 1fr; }
+    .couple-row {
+  display: flex;
+  flex-direction: column;
+}
     .bride-side, .groom-side { padding: 13px 11px; text-align: center; }
-    .bride-side { border-right: 1px solid var(--gold-light); background: linear-gradient(135deg,rgba(255,220,230,0.4),rgba(255,245,250,0.3)); }
+    .bride-side { 
+  border-top: 1px solid var(--gold-light); 
+  background: linear-gradient(135deg,rgba(255,220,230,0.4),rgba(255,245,250,0.3)); 
+}
     .groom-side { background: linear-gradient(135deg,rgba(220,240,255,0.3),rgba(240,250,255,0.4)); }
     .parent-names { font-size: 11.5px; color: var(--text-dark); line-height: 1.7; font-weight: 600; margin-bottom: 7px; }
     .child-label { font-size: 10.5px; color: #666; margin-bottom: 3px; font-family:'Noto Sans Tamil',sans-serif; }
