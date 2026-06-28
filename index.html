@@ -281,9 +281,185 @@
     cursor: pointer;
     box-shadow:0 5px 20px rgba(0,0,0,0.3);
 }
+    /* OPENING COVER */
+
+#openingCover {
+
+    position: fixed;
+    inset:0;
+    background:
+    linear-gradient(
+    135deg,
+    #fff1e6,
+    #ffd6e7
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+
+    transition:1.5s ease;
+
+}
+
+
+.cover-content{
+
+    text-align:center;
+
+    animation:
+    coverAppear 2s ease;
+
+}
+
+
+.cover-content h1{
+
+    color:#9b1c31;
+    font-size:30px;
+
+    margin-bottom:15px;
+
+}
+
+
+.cover-content p{
+
+    font-size:20px;
+    color:#8b5e1a;
+
+}
+
+
+.cover-flower{
+
+    font-size:70px;
+
+    animation:
+    floatFlower 3s infinite;
+
+}
+
+
+#openInvitation{
+
+    margin-top:30px;
+
+    padding:15px 35px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #c8922a,
+    #8b5e1a
+    );
+
+    color:white;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+
+
+#openingCover.hide{
+
+    transform:
+    translateY(-100%);
+
+    opacity:0;
+
+}
+
+
+@keyframes coverAppear{
+
+from{
+opacity:0;
+transform:scale(.8);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+
+@keyframes floatFlower{
+
+50%{
+transform:translateY(-15px);
+}
+
+}
+    .flower{
+
+position:fixed;
+
+top:-50px;
+
+font-size:25px;
+
+z-index:10000;
+
+animation:
+fall 4s linear forwards;
+
+}
+
+
+@keyframes fall{
+
+
+to{
+
+transform:
+translateY(110vh)
+rotate(360deg);
+
+opacity:0;
+
+}
+
+
+}
   </style>
 </head>
 <body>
+
+  <div id="openingCover">
+
+    <div class="cover-content">
+
+        <div class="cover-flower">
+            🌸
+        </div>
+
+        <h1>
+            அபிராமி ❤️ கௌரிசங்கர்
+        </h1>
+
+        <p>
+            திருமண அழைப்பிதழ்
+        </p>
+
+        <button id="openInvitation">
+            திறக்கவும் 💍
+        </button>
+
+    </div>
+
+</div>
 <div class="card">
 
   <!-- ══ HEADER ══ -->
@@ -658,22 +834,103 @@ let playing = false;
 
 
 // Start music after first user interaction
-document.addEventListener("click", function(){
+const cover =
+document.getElementById("openingCover");
 
-    if(!playing){
 
-        music.play()
-        .then(()=>{
-            playing = true;
-            musicButton.innerHTML="🔊";
-        })
-        .catch(error=>{
-            console.log(error);
-        });
+const openBtn =
+document.getElementById("openInvitation");
 
-    }
 
-},{once:true});
+openBtn.onclick=function(){
+
+
+    // start music
+
+    music.play()
+    .then(()=>{
+
+        playing=true;
+        musicButton.innerHTML="🔊";
+
+    });
+
+
+    // remove cover
+
+    cover.classList.add("hide");
+
+
+
+    // flowers
+
+    createFlowers();
+
+
+
+    setTimeout(()=>{
+
+        cover.style.display="none";
+
+    },1500);
+
+
+};
+
+
+
+function createFlowers(){
+
+
+const flowers=[
+"🌸",
+"🌺",
+"🌷",
+"🌹",
+"🌼"
+];
+
+
+for(let i=0;i<40;i++){
+
+
+let flower=document.createElement("div");
+
+
+flower.className="flower";
+
+
+flower.innerHTML=
+flowers[
+Math.floor(Math.random()*flowers.length)
+];
+
+
+flower.style.left=
+Math.random()*100+"vw";
+
+
+flower.style.animationDuration=
+(3+Math.random()*3)+"s";
+
+
+document.body.appendChild(flower);
+
+
+
+setTimeout(()=>{
+
+flower.remove();
+
+},6000);
+
+
+
+}
+
+
+
+}
 
 
 // Manual play/pause button
